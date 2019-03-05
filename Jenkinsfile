@@ -5,12 +5,22 @@ pipeline {
     skipDefaultCheckout true
   }
   stages {
-    stage('Say Hello') {
+    stage('Test') {
       steps {
-      checkout scm
-       container('nodejs') {
-        echo 'Hello World!'   
-        sh 'node --version'
+        checkout scm
+        container('nodejs') {
+          echo 'Hello World!'   
+          sh 'node --version'
+        }
+      }
+    }
+    stage('Build and Push Image') {
+      when {
+         beforeAgent true
+         branch 'master'
+      }
+      steps {
+         echo "TODO - build and push image"
       }
     }
   }
